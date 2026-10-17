@@ -4,7 +4,7 @@
 <div class="page-header">
     <div>
         <h1>Add student</h1>
-        <p class="subtitle">Create a student record and their login account.</p>
+        <p class="subtitle">Create a Student Profile and Their Login Credintials.</p>
     </div>
 </div>
 
@@ -14,24 +14,24 @@
             <form method="post">
                 <div asp-validation-summary="All" class="alert alert-danger py-2"></div>
 
-                <div class="form-section-title mt-0">Student details</div>
-                <div class="mb-3"><label asp-for="Input.FullName" class="form-label">Full name</label>
+                <div class="form-section-title mt-0">STUDENT DETAILS</div>
+                <div class="mb-3"><label asp-for="Input.FullName" class="form-label">Full Name</label>
                     <input asp-for="Input.FullName" class="form-control" /></div>
-                <div class="mb-3"><label asp-for="Input.Email" class="form-label">Email</label>
+                <div class="mb-3"><label asp-for="Input.Email" class="form-label">Email Address</label>
                     <input asp-for="Input.Email" class="form-control" /></div>
                 <div class="mb-3"><label asp-for="Input.CourseId" class="form-label">Course</label>
                     <select asp-for="Input.CourseId" asp-items="Model.CourseList" class="form-select"></select></div>
 
-                <div class="form-section-title">Login account</div>
+                <div class="form-section-title">Login Credintials</div>
                 <div class="row">
-                    <div class="col-md-6 mb-3"><label asp-for="Input.UserName" class="form-label">User name</label>
+                    <div class="col-md-6 mb-3"><label asp-for="Input.UserName" class="form-label">User Name</label>
                         <input asp-for="Input.UserName" class="form-control" autocomplete="off" /></div>
                     <div class="col-md-6 mb-3"><label asp-for="Input.Password" class="form-label">Password</label>
                         <input asp-for="Input.Password" type="password" class="form-control" autocomplete="new-password" /></div>
                 </div>
 
                 <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">Create student</button>
+                    <button type="submit" class="btn btn-primary">Create Student Profile</button>
                     <a asp-page="./Index" class="btn btn-light">Cancel</a>
                 </div>
             </form>

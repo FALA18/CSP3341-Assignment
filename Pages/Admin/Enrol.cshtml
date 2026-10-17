@@ -4,20 +4,20 @@
 <div class="page-header">
     <div>
         <h1>Units for @Model.Student?.FullName</h1>
-        <p class="subtitle">Add or remove this student's unit enrolments.</p>
+        <p class="subtitle">Add or Remove this student's unit Enrolments.</p>
     </div>
-    <a asp-page="./Index" class="btn btn-light">Back to students</a>
+    <a asp-page="./Index" class="btn btn-light">Back to Students</a>
 </div>
 
 <div class="app-card">
-    <div class="app-card-header"><h2>Current enrolments</h2></div>
+    <div class="app-card-header"><h2>Current Enrolments</h2></div>
     <div class="table-responsive">
         <table class="table app-table">
             <thead><tr><th>Code</th><th>Unit</th><th>Semester</th><th class="text-end">Mark</th><th></th></tr></thead>
             <tbody>
             @if (Model.Student!.Enrolments.Count == 0)
             {
-                <tr class="empty-row"><td colspan="5">No units yet.</td></tr>
+                <tr class="empty-row"><td colspan="5">No Units Yet.</td></tr>
             }
             @foreach (var e in Model.Student.Enrolments)
             {

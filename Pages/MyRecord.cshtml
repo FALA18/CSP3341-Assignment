@@ -4,7 +4,7 @@
 @if (Model.Student is null)
 {
     <div class="app-card app-card-body">
-        <p class="text-danger mb-0">No student record is linked to this account.</p>
+        <p class="text-danger mb-0">No Student Record is linked to this account.</p>
     </div>
 }
 else
@@ -12,13 +12,13 @@ else
     <div class="page-header">
         <div>
             <h1>@Model.Student.FullName</h1>
-            <p class="subtitle">Your personal details, enrolled units and current results.</p>
+            <p class="subtitle">Your personal Details, Enrolled units and Current results.</p>
         </div>
     </div>
 
     <div class="stat-grid">
         <div class="app-card stat-tile">
-            <div class="stat-label">Current WAM</div>
+            <div class="stat-label">Current WAM (Average)</div>
             <div class="stat-value">@Model.Wam.ToString("F1")</div>
         </div>
         <div class="app-card stat-tile">
@@ -26,7 +26,7 @@ else
             <div class="stat-value small-text"><span class="status-badge @StudentStatus.BadgeClass(Model.Student.Status)">@Model.Student.Status</span></div>
         </div>
         <div class="app-card stat-tile">
-            <div class="stat-label">Units enrolled</div>
+            <div class="stat-label">Units Enrolled</div>
             <div class="stat-value">@Model.Student.Enrolments.Count</div>
         </div>
         <div class="app-card stat-tile">
@@ -36,10 +36,10 @@ else
     </div>
 
     <div class="app-card">
-        <div class="app-card-header"><h2>Personal details</h2></div>
+        <div class="app-card-header"><h2>PERSONAL DETAILS</h2></div>
         <div class="app-card-body">
             <dl class="detail-list">
-                <dt>Full name</dt><dd>@Model.Student.FullName</dd>
+                <dt>Full Name</dt><dd>@Model.Student.FullName</dd>
                 <dt>Email</dt><dd>@Model.Student.Email</dd>
                 <dt>Course</dt><dd>@Model.Student.Course?.CourseName</dd>
             </dl>
@@ -47,7 +47,7 @@ else
     </div>
 
     <div class="app-card">
-        <div class="app-card-header"><h2>Enrolled units</h2></div>
+        <div class="app-card-header"><h2>Enrolled Units</h2></div>
         <div class="table-responsive">
             <table class="table app-table">
                 <thead><tr><th>Code</th><th>Unit</th><th>Semester</th><th class="text-end">Mark</th></tr></thead>

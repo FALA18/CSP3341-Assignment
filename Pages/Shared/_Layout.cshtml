@@ -34,13 +34,13 @@
                             @if (User.IsInRole("Admin"))
                             {
                                 <li class="nav-item"><a class="nav-link @(currentPage is "/Admin/Index" or "/Admin/Edit" or "/Admin/Enrol" or "/Admin/Delete" ? "active" : "")" asp-page="/Admin/Index">Students</a></li>
-                                <li class="nav-item"><a class="nav-link @Active("/Admin/CreateStudent")" asp-page="/Admin/CreateStudent">Add student</a></li>
+                                <li class="nav-item"><a class="nav-link @Active("/Admin/CreateStudent")" asp-page="/Admin/CreateStudent">Add Student</a></li>
                                 <li class="nav-item"><a class="nav-link @Active("/Admin/Courses")" asp-page="/Admin/Courses">Courses</a></li>
                                 <li class="nav-item"><a class="nav-link @Active("/Admin/Units")" asp-page="/Admin/Units">Units</a></li>
                             }
                             @if (User.IsInRole("Student"))
                             {
-                                <li class="nav-item"><a class="nav-link @Active("/MyRecord")" asp-page="/MyRecord">My record</a></li>
+                                <li class="nav-item"><a class="nav-link @Active("/MyRecord")" asp-page="/MyRecord">My Record</a></li>
                             }
                         </ul>
                         <form method="post" asp-page="/Logout" class="d-flex align-items-center gap-3 user-box">
@@ -48,7 +48,7 @@
                                 <span class="user-name">@User.Identity!.Name</span>
                                 <span class="user-role">@(User.IsInRole("Admin") ? "Administrator" : "Student")</span>
                             </div>
-                            <button type="submit" class="btn btn-sm btn-outline-light">Log out</button>
+                            <button type="submit" class="btn btn-sm btn-outline-light">Log Out</button>
                         </form>
                     </div>
                 }

@@ -3,7 +3,6 @@ using StudentRecordDraft.Models;
 
 namespace StudentRecordDraft.Data;
 
-/// <summary>Entity Framework Core database context (maps classes to SQLite tables).</summary>
 public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options)
 {
     public DbSet<Account> Accounts => Set<Account>();

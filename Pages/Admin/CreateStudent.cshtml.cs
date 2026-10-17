@@ -8,8 +8,7 @@ using StudentRecordDraft.Data;
 using StudentRecordDraft.Models;
 
 namespace StudentRecordDraft.Pages.Admin;
-
-/// <summary>Creates a student record and the student's login account in one step.</summary>
+/// <summary>Lets the admin create a new student profile.</summary>
 public class CreateStudentModel(AppDbContext db) : PageModel
 {
     [BindProperty] public StudentInput Input { get; set; } = new();
@@ -25,7 +24,7 @@ public class CreateStudentModel(AppDbContext db) : PageModel
 
         var student = new Student { FullName = Input.FullName, Email = Input.Email, CourseId = Input.CourseId };
         db.Students.Add(student);
-        await db.SaveChangesAsync();                          // generates student.Id
+        await db.SaveChangesAsync();                         
 
         var account = new Account { UserName = Input.UserName, Role = "Student", StudentId = student.Id };
         account.PasswordHash = new PasswordHasher<Account>().HashPassword(account, Input.Password);

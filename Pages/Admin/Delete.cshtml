@@ -3,7 +3,7 @@
 @{ ViewData["Title"] = "Delete student"; }
 <div class="page-header">
     <div>
-        <h1>Delete student</h1>
+        <h1>Delete Student</h1>
         <p class="subtitle">This action cannot be undone.</p>
     </div>
 </div>
@@ -12,9 +12,9 @@
     <div class="col-lg-7">
         <div class="app-card app-card-body">
             <p class="mb-1">Are you sure you want to permanently delete <strong>@Model.Student?.FullName</strong>?</p>
-            <p class="text-muted mb-0">Their login account and all of their unit enrolments will also be removed.</p>
+            <p class="text-muted mb-0">Their login credintials and all of their unit enrolments will also be removed.</p>
             <form method="post" class="form-actions">
-                <button type="submit" class="btn btn-danger">Delete student</button>
+                <button type="submit" class="btn btn-danger">Delete Student</button>
                 <a asp-page="./Index" class="btn btn-light">Cancel</a>
             </form>
         </div>

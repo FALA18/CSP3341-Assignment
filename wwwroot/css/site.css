@@ -1,31 +1,231 @@
-html {
-  font-size: 14px;
+/* ------------------------------------------------------------------
+   Student Record System - site theme (builds on Bootstrap 5)
+   ------------------------------------------------------------------ */
+
+:root {
+  --app-primary: #1f3a5f;
+  --app-primary-hover: #17304f;
+  --app-accent: #2f6fb3;
+  --app-bg: #f4f6f9;
+  --app-surface: #ffffff;
+  --app-border: #e3e7ed;
+  --app-text: #1d2733;
+  --app-muted: #6b7684;
+  --app-radius: 10px;
+  --app-shadow: 0 1px 2px rgba(16, 24, 40, .04), 0 4px 12px rgba(16, 24, 40, .05);
+
+  --bs-body-font-family: "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --bs-body-color: var(--app-text);
+  --bs-link-color-rgb: 47, 111, 179;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+html { font-size: 14px; }
+@media (min-width: 768px) { html { font-size: 15px; } }
+
+/* Sticky footer: body is a full-height column, main grows to fill it. */
+.app-body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--app-bg);
+}
+.app-main { flex: 1 0 auto; padding: 2rem 0 3rem; }
+
+/* ---------- Navigation ---------- */
+.app-navbar {
+  background: var(--app-primary);
+  padding-top: .65rem;
+  padding-bottom: .65rem;
+}
+.app-brand {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  font-weight: 600;
+  letter-spacing: .2px;
+}
+.brand-mark {
+  display: inline-grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, .14);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .5px;
+}
+.app-navbar .nav-link {
+  color: rgba(255, 255, 255, .75);
+  border-radius: 6px;
+  padding: .4rem .8rem !important;
+  margin-right: .15rem;
+}
+.app-navbar .nav-link:hover { color: #fff; background: rgba(255, 255, 255, .08); }
+.app-navbar .nav-link.active { color: #fff; background: rgba(255, 255, 255, .16); }
+.user-meta { display: flex; flex-direction: column; line-height: 1.15; text-align: right; }
+.user-name { color: #fff; font-weight: 600; font-size: .9rem; }
+.user-role { color: rgba(255, 255, 255, .6); font-size: .75rem; }
+@media (max-width: 767.98px) {
+  .user-box { margin-top: .75rem; justify-content: space-between; }
+  .user-meta { text-align: left; }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+/* ---------- Footer ---------- */
+.app-footer {
+  flex-shrink: 0;
+  border-top: 1px solid var(--app-border);
+  background: var(--app-surface);
+  color: var(--app-muted);
+  font-size: .85rem;
+  padding: 1rem 0;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+/* ---------- Page header ---------- */
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.page-header h1 { font-size: 1.6rem; font-weight: 600; margin: 0; }
+.page-header .subtitle { color: var(--app-muted); margin: .25rem 0 0; }
+
+/* ---------- Cards ---------- */
+.app-card {
+  background: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--app-radius);
+  box-shadow: var(--app-shadow);
+}
+.app-card + .app-card { margin-top: 1.5rem; }
+.app-card-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--app-border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.app-card-header h2 { font-size: 1.05rem; font-weight: 600; margin: 0; }
+.app-card-body { padding: 1.25rem; }
+
+/* ---------- Tables ---------- */
+.app-table { margin: 0; }
+.app-table thead th {
+  background: #f8f9fb;
+  color: var(--app-muted);
+  font-size: .75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  border-bottom: 1px solid var(--app-border);
+  padding: .75rem 1.25rem;
+  white-space: nowrap;
+}
+.app-table td { padding: .8rem 1.25rem; vertical-align: middle; border-color: var(--app-border); }
+.app-table tbody tr:last-child td { border-bottom: 0; }
+.app-table tbody tr:hover td { background: #fafbfc; }
+.cell-sub { display: block; color: var(--app-muted); font-size: .85rem; }
+.empty-row td { text-align: center; color: var(--app-muted); padding: 2rem 1rem !important; }
+.code-tag {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .82rem;
+  background: #eef2f7;
+  color: var(--app-primary);
+  padding: .15rem .45rem;
+  border-radius: 5px;
 }
 
-body {
-  margin-bottom: 60px;
+/* ---------- Status badges ---------- */
+.status-badge {
+  display: inline-block;
+  padding: .25rem .6rem;
+  border-radius: 999px;
+  font-size: .78rem;
+  font-weight: 600;
+  white-space: nowrap;
 }
+.status-active    { background: #e6f4ea; color: #1e7b3a; }
+.status-leave     { background: #fff4de; color: #9a6200; }
+.status-suspended { background: #fdecea; color: #b42318; }
+.status-withdrawn { background: #eef0f3; color: #4a5565; }
+.status-graduated { background: #e8f0fb; color: #1f5aa6; }
+.status-other     { background: #eef0f3; color: #4a5565; }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+/* ---------- Summary tiles (student record) ---------- */
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
+.stat-tile { padding: 1.1rem 1.25rem; }
+.stat-label {
+  color: var(--app-muted);
+  font-size: .75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+}
+.stat-value { font-size: 1.5rem; font-weight: 600; margin-top: .3rem; line-height: 1.2; }
+.stat-value.small-text { font-size: 1.05rem; }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+.detail-list { display: grid; grid-template-columns: 160px 1fr; row-gap: .75rem; margin: 0; }
+.detail-list dt { color: var(--app-muted); font-weight: 500; }
+.detail-list dd { margin: 0; }
+@media (max-width: 575.98px) { .detail-list { grid-template-columns: 1fr; row-gap: .2rem; } .detail-list dd { margin-bottom: .6rem; } }
+
+/* ---------- Forms & buttons ---------- */
+.form-label { font-weight: 500; font-size: .9rem; margin-bottom: .35rem; }
+.form-control, .form-select { border-color: #d5dbe3; border-radius: 7px; padding: .55rem .8rem; }
+.form-control:focus, .form-select:focus,
+.btn:focus-visible {
+  border-color: var(--app-accent);
+  box-shadow: 0 0 0 .2rem rgba(47, 111, 179, .2);
+}
+.form-section-title {
+  font-size: .8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  color: var(--app-muted);
+  margin: 1.5rem 0 .75rem;
+}
+.btn { border-radius: 7px; font-weight: 500; }
+.btn-primary { background: var(--app-primary); border-color: var(--app-primary); }
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+  background: var(--app-primary-hover) !important;
+  border-color: var(--app-primary-hover) !important;
+}
+.btn-outline-primary { color: var(--app-primary); border-color: #c3cfdd; }
+.btn-outline-primary:hover { background: var(--app-primary); border-color: var(--app-primary); }
+.form-actions { display: flex; gap: .5rem; margin-top: 1.5rem; }
+.validation-summary-valid { display: none; }
+.validation-summary-errors ul { margin: 0; padding-left: 1.1rem; }
+
+/* ---------- Login (centred card) ---------- */
+.auth-body .app-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+}
+.auth-wrapper { display: flex; justify-content: center; width: 100%; }
+.auth-card { width: 100%; max-width: 420px; padding: 2.25rem 2rem; }
+.auth-card h1 { font-size: 1.5rem; font-weight: 600; margin-bottom: .25rem; text-align: center; }
+.auth-card .subtitle { color: var(--app-muted); text-align: center; margin-bottom: 1.75rem; }
+.role-toggle { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; }
+.role-toggle .btn {
+  border: 1px solid #d5dbe3;
+  color: var(--app-text);
+  background: #fff;
+  padding: .55rem;
+}
+.role-toggle .btn-check:checked + .btn {
+  background: var(--app-primary);
+  border-color: var(--app-primary);
+  color: #fff;
 }

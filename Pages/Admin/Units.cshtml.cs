@@ -24,7 +24,6 @@ public class UnitsModel(AppDbContext db) : PageModel
 
     public async Task<IActionResult> OnPostAsync()
     {
-        // Only add the unit if the chosen course exists and both text boxes are filled.
         if (await db.Courses.AnyAsync(c => c.Id == CourseId) &&
             !string.IsNullOrWhiteSpace(Code) && !string.IsNullOrWhiteSpace(Name))
         {

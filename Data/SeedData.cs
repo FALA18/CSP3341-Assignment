@@ -8,7 +8,7 @@ public static class SeedData
 {
     public static void Initialise(AppDbContext db)
     {
-        if (db.Accounts.Any()) return;                        // already seeded
+        if (db.Accounts.Any()) return;                        
 
         var course = new Course { CourseCode = "BSc-CS", CourseName = "Bachelor of Science (Computer Science)" };
         var units = new[]
@@ -18,7 +18,7 @@ public static class SeedData
             new Unit { UnitCode = "DEM2001", UnitName = "Web Development", Course = course }
         };
 
-        // Local helper: builds an enrolment for a student in a unit.
+        
         Enrolment Enrol(Unit u, int mark) => new() { Unit = u, Mark = mark, Semester = "2026-S2" };
 
         var alice = new Student

@@ -1,9 +1,5 @@
 namespace StudentRecordDraft.Models;
 
-/// <summary>
-/// The allowed values for <see cref="Student.Status"/>, kept in one place so the
-/// edit form, the validation and the status badges all agree.
-/// </summary>
 public static class StudentStatus
 {
     public const string Active = "Active";
@@ -16,7 +12,7 @@ public static class StudentStatus
 
     public static bool IsValid(string? status) => status is not null && All.Contains(status);
 
-    /// <summary>CSS class for the coloured status badge (switch expression).</summary>
+    
     public static string BadgeClass(string? status) => status switch
     {
         Active => "status-active",

@@ -7,7 +7,7 @@ using StudentRecordDraft.Models;
 
 namespace StudentRecordDraft.Pages.Admin;
 
-/// <summary>Admin page for editing a student's details, status and unit marks.</summary>
+/// <summary>Admin page for editing a student's profile.</summary>
 public class EditModel(AppDbContext db) : PageModel
 {
     [BindProperty] public EditInput Input { get; set; } = new();
@@ -19,7 +19,6 @@ public class EditModel(AppDbContext db) : PageModel
             .FirstOrDefaultAsync(s => s.Id == id);
         if (student is null) return NotFound();
 
-        // LINQ Select projects each enrolment into the form's input object.
         Input = new EditInput
         {
             FullName = student.FullName,

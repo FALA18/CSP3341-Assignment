@@ -16,8 +16,6 @@ public class IndexModel(AppDbContext db) : PageModel
     {
         var query = db.Students.Include(s => s.Course).Include(s => s.Enrolments).AsQueryable();
 
-        // LINQ query composition: the filter is only added when a search term exists,
-        // and EF Core translates the whole expression into one SQL statement.
         if (!string.IsNullOrWhiteSpace(Search))
             query = query.Where(s => s.FullName.Contains(Search) || s.Email.Contains(Search));
 

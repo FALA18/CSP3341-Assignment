@@ -23,6 +23,6 @@ public class CoursesModel(AppDbContext db) : PageModel
             db.Courses.Add(new Course { CourseCode = Code.Trim(), CourseName = Name.Trim() });
             await db.SaveChangesAsync();
         }
-        return RedirectToPage();                              // reload the list
+        return RedirectToPage();                              
     }
 }
