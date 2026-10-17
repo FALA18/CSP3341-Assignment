@@ -1,0 +1,10 @@
+@page
+@model AccessDeniedModel
+@{ ViewData["Title"] = "Access denied"; }
+<div class="auth-wrapper">
+    <div class="app-card auth-card text-center">
+        <h1>Access denied</h1>
+        <p class="subtitle mb-4">Your account does not have permission to view that page.</p>
+        <a asp-page="/Index" class="btn btn-primary">Go to my home page</a>
+    </div>
+</div>

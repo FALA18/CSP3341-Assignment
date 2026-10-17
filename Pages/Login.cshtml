@@ -1,0 +1,32 @@
+@page
+@model LoginModel
+@{ ViewData["Title"] = "Log in"; }
+<div class="auth-wrapper">
+    <div class="app-card auth-card">
+        <h1>Welcome back</h1>
+        <p class="subtitle">Sign in to the Student Record System</p>
+
+        <form method="post">
+            @if (Model.Error is not null) { <div class="alert alert-danger py-2">@Model.Error</div> }
+
+            <div class="mb-3">
+                <label class="form-label">Log in as</label>
+                <div class="role-toggle" role="group" aria-label="Log in as">
+                    <input asp-for="Role" type="radio" value="Student" id="role-student" class="btn-check" autocomplete="off" />
+                    <label class="btn" for="role-student">Student</label>
+                    <input asp-for="Role" type="radio" value="Admin" id="role-admin" class="btn-check" autocomplete="off" />
+                    <label class="btn" for="role-admin">Admin</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="UserName" class="form-label">User name</label>
+                <input asp-for="UserName" class="form-control" autocomplete="username" autofocus />
+            </div>
+            <div class="mb-4">
+                <label asp-for="Password" class="form-label">Password</label>
+                <input asp-for="Password" type="password" class="form-control" autocomplete="current-password" />
+            </div>
+            <button type="submit" class="btn btn-primary w-100 py-2">Log in</button>
+        </form>
+    </div>
+</div>

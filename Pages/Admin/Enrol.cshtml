@@ -1,0 +1,55 @@
+@page "{id:int}"
+@model EnrolModel
+@{ ViewData["Title"] = "Student units"; }
+<div class="page-header">
+    <div>
+        <h1>Units for @Model.Student?.FullName</h1>
+        <p class="subtitle">Add or remove this student's unit enrolments.</p>
+    </div>
+    <a asp-page="./Index" class="btn btn-light">Back to students</a>
+</div>
+
+<div class="app-card">
+    <div class="app-card-header"><h2>Current enrolments</h2></div>
+    <div class="table-responsive">
+        <table class="table app-table">
+            <thead><tr><th>Code</th><th>Unit</th><th>Semester</th><th class="text-end">Mark</th><th></th></tr></thead>
+            <tbody>
+            @if (Model.Student!.Enrolments.Count == 0)
+            {
+                <tr class="empty-row"><td colspan="5">No units yet.</td></tr>
+            }
+            @foreach (var e in Model.Student.Enrolments)
+            {
+                <tr>
+                    <td><span class="code-tag">@e.Unit?.UnitCode</span></td>
+                    <td>@e.Unit?.UnitName</td>
+                    <td>@e.Semester</td>
+                    <td class="text-end fw-semibold">@e.Mark</td>
+                    <td class="text-end">
+                        <form method="post" asp-page-handler="Remove" asp-route-id="@Model.Student.Id" asp-route-enrolmentId="@e.Id">
+                            <button class="btn btn-sm btn-outline-danger">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="app-card">
+    <div class="app-card-header"><h2>Add a unit</h2></div>
+    <div class="app-card-body">
+        <div asp-validation-summary="All" class="alert alert-danger py-2"></div>
+        <form method="post" class="row g-2 align-items-end">
+            <div class="col-md-5"><label asp-for="UnitId" class="form-label">Unit</label>
+                <select asp-for="UnitId" asp-items="Model.UnitList" class="form-select"></select></div>
+            <div class="col-md-3"><label asp-for="Semester" class="form-label">Semester</label>
+                <input asp-for="Semester" class="form-control" /></div>
+            <div class="col-md-2"><label asp-for="Mark" class="form-label">Mark</label>
+                <input asp-for="Mark" class="form-control" /></div>
+            <div class="col-md-2"><button type="submit" class="btn btn-primary w-100">Add</button></div>
+        </form>
+    </div>
+</div>

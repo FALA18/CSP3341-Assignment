@@ -1,45 +1,70 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - StudentRecordDraft</title>
+    <title>@ViewData["Title"] - Student Record System</title>
     <script type="importmap"></script>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/StudentRecordDraft.styles.css" asp-append-version="true" />
 </head>
-<body>
+@{
+    // Highlights the current section in the navigation bar.
+    var currentPage = ViewContext.RouteData.Values["page"]?.ToString() ?? string.Empty;
+    string Active(string page) => currentPage.StartsWith(page, StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
+    var signedIn = User.Identity?.IsAuthenticated == true;
+}
+<body class="@(signedIn ? "app-body" : "app-body auth-body")">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-md navbar-dark app-navbar">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">StudentRecordDraft</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+                <a class="navbar-brand app-brand" asp-area="" asp-page="/Index">
+                    <span class="brand-mark">SR</span>
+                    <span>Student Record System</span>
+                </a>
+                @if (signedIn)
+                {
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+                            aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="mainNav">
+                        <ul class="navbar-nav me-auto">
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item"><a class="nav-link @(currentPage is "/Admin/Index" or "/Admin/Edit" or "/Admin/Enrol" or "/Admin/Delete" ? "active" : "")" asp-page="/Admin/Index">Students</a></li>
+                                <li class="nav-item"><a class="nav-link @Active("/Admin/CreateStudent")" asp-page="/Admin/CreateStudent">Add student</a></li>
+                                <li class="nav-item"><a class="nav-link @Active("/Admin/Courses")" asp-page="/Admin/Courses">Courses</a></li>
+                                <li class="nav-item"><a class="nav-link @Active("/Admin/Units")" asp-page="/Admin/Units">Units</a></li>
+                            }
+                            @if (User.IsInRole("Student"))
+                            {
+                                <li class="nav-item"><a class="nav-link @Active("/MyRecord")" asp-page="/MyRecord">My record</a></li>
+                            }
+                        </ul>
+                        <form method="post" asp-page="/Logout" class="d-flex align-items-center gap-3 user-box">
+                            <div class="user-meta">
+                                <span class="user-name">@User.Identity!.Name</span>
+                                <span class="user-role">@(User.IsInRole("Admin") ? "Administrator" : "Student")</span>
+                            </div>
+                            <button type="submit" class="btn btn-sm btn-outline-light">Log out</button>
+                        </form>
+                    </div>
+                }
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
+    <main role="main" class="app-main">
         <div class="container">
-            &copy; 2026 - StudentRecordDraft - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="app-footer">
+        <div class="container">
+            &copy; 2026 Student Record System
         </div>
     </footer>
 

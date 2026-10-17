@@ -1,0 +1,54 @@
+@page "{id:int}"
+@model EditModel
+@{ ViewData["Title"] = "Edit student"; }
+<div class="page-header">
+    <div>
+        <h1>Edit student</h1>
+        <p class="subtitle">Update personal details, status and unit marks.</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-7">
+        <div class="app-card app-card-body">
+            <form method="post">
+                <div asp-validation-summary="All" class="alert alert-danger py-2"></div>
+
+                <div class="form-section-title mt-0">Personal details</div>
+                <div class="mb-3"><label asp-for="Input.FullName" class="form-label">Full name</label>
+                    <input asp-for="Input.FullName" class="form-control" /></div>
+                <div class="row">
+                    <div class="col-md-7 mb-3"><label asp-for="Input.Email" class="form-label">Email</label>
+                        <input asp-for="Input.Email" class="form-control" /></div>
+                    <div class="col-md-5 mb-3"><label asp-for="Input.Status" class="form-label">Status</label>
+                        <select asp-for="Input.Status" class="form-select">
+                            @foreach (var status in StudentStatus.All)
+                            {
+                                <option value="@status">@status</option>
+                            }
+                        </select></div>
+                </div>
+
+                <div class="form-section-title">Unit marks</div>
+                @if (Model.Input.Marks.Count == 0)
+                {
+                    <p class="text-muted">This student is not enrolled in any units.</p>
+                }
+                @for (int i = 0; i < Model.Input.Marks.Count; i++)
+                {
+                    <div class="row align-items-center mb-2">
+                        <input type="hidden" asp-for="Input.Marks[i].EnrolmentId" />
+                        <input type="hidden" asp-for="Input.Marks[i].UnitName" />
+                        <label class="col-8 col-form-label" for="@Html.IdFor(m => m.Input.Marks[i].Mark)">@Model.Input.Marks[i].UnitName</label>
+                        <div class="col-4"><input asp-for="Input.Marks[i].Mark" class="form-control text-end" /></div>
+                    </div>
+                }
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <a asp-page="./Index" class="btn btn-light">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

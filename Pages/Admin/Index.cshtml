@@ -1,0 +1,54 @@
+@page
+@model IndexModel
+@{ ViewData["Title"] = "Students"; }
+<div class="page-header">
+    <div>
+        <h1>Student records</h1>
+        <p class="subtitle">Search, view, edit and delete student records.</p>
+    </div>
+    <a asp-page="./CreateStudent" class="btn btn-primary">Add student</a>
+</div>
+
+<div class="app-card">
+    <div class="app-card-header">
+        <form method="get" class="d-flex gap-2 flex-grow-1" style="max-width: 520px;">
+            <input asp-for="Search" class="form-control" placeholder="Search by name or email" />
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+            @if (!string.IsNullOrWhiteSpace(Model.Search))
+            {
+                <a asp-page="./Index" class="btn btn-link text-decoration-none">Clear</a>
+            }
+        </form>
+        <span class="text-muted small">@Model.Students.Count student(s)</span>
+    </div>
+    <div class="table-responsive">
+        <table class="table app-table">
+            <thead>
+                <tr><th>Student</th><th>Course</th><th>Status</th><th class="text-end">WAM</th><th class="text-end">Actions</th></tr>
+            </thead>
+            <tbody>
+            @if (Model.Students.Count == 0)
+            {
+                <tr class="empty-row"><td colspan="5">No students found.</td></tr>
+            }
+            @foreach (var s in Model.Students)
+            {
+                <tr>
+                    <td>
+                        <span class="fw-semibold">@s.FullName</span>
+                        <span class="cell-sub">@s.Email</span>
+                    </td>
+                    <td><span class="code-tag">@s.Course?.CourseCode</span></td>
+                    <td><span class="status-badge @StudentStatus.BadgeClass(s.Status)">@s.Status</span></td>
+                    <td class="text-end fw-semibold">@s.GetWam().ToString("F1")</td>
+                    <td class="text-end text-nowrap">
+                        <a asp-page="./Edit" asp-route-id="@s.Id" class="btn btn-sm btn-outline-primary">Edit</a>
+                        <a asp-page="./Enrol" asp-route-id="@s.Id" class="btn btn-sm btn-outline-primary">Units</a>
+                        <a asp-page="./Delete" asp-route-id="@s.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

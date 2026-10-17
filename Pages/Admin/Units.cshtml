@@ -1,0 +1,43 @@
+@page
+@model UnitsModel
+@{ ViewData["Title"] = "Units"; }
+<div class="page-header">
+    <div>
+        <h1>Units</h1>
+        <p class="subtitle">Units (subjects) that make up each course.</p>
+    </div>
+</div>
+
+<div class="app-card">
+    <div class="app-card-header"><h2>Add a unit</h2></div>
+    <div class="app-card-body">
+        <form method="post" class="row g-2 align-items-end">
+            <div class="col-md-4"><label asp-for="CourseId" class="form-label">Course</label>
+                <select asp-for="CourseId" asp-items="Model.CourseList" class="form-select"></select></div>
+            <div class="col-md-2"><label asp-for="Code" class="form-label">Unit code</label>
+                <input asp-for="Code" class="form-control" placeholder="e.g. DEM1001" /></div>
+            <div class="col-md-4"><label asp-for="Name" class="form-label">Unit name</label>
+                <input asp-for="Name" class="form-control" placeholder="e.g. Databases" /></div>
+            <div class="col-md-2"><button type="submit" class="btn btn-primary w-100">Add unit</button></div>
+        </form>
+    </div>
+</div>
+
+<div class="app-card">
+    <div class="app-card-header"><h2>All units</h2><span class="text-muted small">@Model.Units.Count unit(s)</span></div>
+    <div class="table-responsive">
+        <table class="table app-table">
+            <thead><tr><th>Code</th><th>Name</th><th>Course</th></tr></thead>
+            <tbody>
+            @if (Model.Units.Count == 0)
+            {
+                <tr class="empty-row"><td colspan="3">No units yet.</td></tr>
+            }
+            @foreach (var u in Model.Units)
+            {
+                <tr><td><span class="code-tag">@u.UnitCode</span></td><td>@u.UnitName</td><td>@u.Course?.CourseCode</td></tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

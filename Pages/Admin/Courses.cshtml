@@ -1,0 +1,41 @@
+@page
+@model CoursesModel
+@{ ViewData["Title"] = "Courses"; }
+<div class="page-header">
+    <div>
+        <h1>Courses</h1>
+        <p class="subtitle">Courses (degrees) that students can be enrolled in.</p>
+    </div>
+</div>
+
+<div class="app-card">
+    <div class="app-card-header"><h2>Add a course</h2></div>
+    <div class="app-card-body">
+        <form method="post" class="row g-2 align-items-end">
+            <div class="col-md-3"><label asp-for="Code" class="form-label">Course code</label>
+                <input asp-for="Code" class="form-control" placeholder="e.g. BSc-CS" /></div>
+            <div class="col-md-7"><label asp-for="Name" class="form-label">Course name</label>
+                <input asp-for="Name" class="form-control" placeholder="e.g. Bachelor of Science (Computer Science)" /></div>
+            <div class="col-md-2"><button type="submit" class="btn btn-primary w-100">Add course</button></div>
+        </form>
+    </div>
+</div>
+
+<div class="app-card">
+    <div class="app-card-header"><h2>All courses</h2><span class="text-muted small">@Model.Courses.Count course(s)</span></div>
+    <div class="table-responsive">
+        <table class="table app-table">
+            <thead><tr><th>Code</th><th>Name</th><th class="text-end">Units</th></tr></thead>
+            <tbody>
+            @if (Model.Courses.Count == 0)
+            {
+                <tr class="empty-row"><td colspan="3">No courses yet.</td></tr>
+            }
+            @foreach (var c in Model.Courses)
+            {
+                <tr><td><span class="code-tag">@c.CourseCode</span></td><td>@c.CourseName</td><td class="text-end">@c.Units.Count</td></tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
