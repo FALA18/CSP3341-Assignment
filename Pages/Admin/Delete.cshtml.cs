@@ -22,6 +22,7 @@ public class DeleteModel(AppDbContext db) : PageModel
         var student = await db.Students.FindAsync(id);
         if (student is null) return NotFound();
 
+        // Remove the student's login account, then the student (enrolments cascade-delete).
         db.Accounts.RemoveRange(db.Accounts.Where(a => a.StudentId == id));
         db.Students.Remove(student);
         await db.SaveChangesAsync();

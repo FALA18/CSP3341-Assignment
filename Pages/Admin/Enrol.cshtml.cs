@@ -30,6 +30,8 @@ public class EnrolModel(AppDbContext db) : PageModel
         await db.SaveChangesAsync();
         return RedirectToPage(new { id });
     }
+
+    // Handler name "Remove" matches asp-page-handler="Remove" in the view.
     public async Task<IActionResult> OnPostRemoveAsync(int id, int enrolmentId)
     {
         var enrolment = await db.Enrolments.FindAsync(enrolmentId);

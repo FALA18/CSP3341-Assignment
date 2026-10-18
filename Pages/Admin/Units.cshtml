@@ -8,9 +8,13 @@
     </div>
 </div>
 
+@if (Model.Message is not null) { <div class="alert alert-success py-2">@Model.Message</div> }
+@if (Model.Error is not null) { <div class="alert alert-danger py-2">@Model.Error</div> }
+
 <div class="app-card">
     <div class="app-card-header"><h2>Add a Unit</h2></div>
     <div class="app-card-body">
+        <div asp-validation-summary="All" class="alert alert-danger py-2"></div>
         <form method="post" class="row g-2 align-items-end">
             <div class="col-md-4"><label asp-for="CourseId" class="form-label">Course</label>
                 <select asp-for="CourseId" asp-items="Model.CourseList" class="form-select"></select></div>
@@ -27,15 +31,24 @@
     <div class="app-card-header"><h2>All units</h2><span class="text-muted small">@Model.Units.Count unit(s)</span></div>
     <div class="table-responsive">
         <table class="table app-table">
-            <thead><tr><th>Code</th><th>Name</th><th>Course</th></tr></thead>
+            <thead><tr><th>Code</th><th>Name</th><th>Course</th><th class="text-end">Enrolled</th><th></th></tr></thead>
             <tbody>
             @if (Model.Units.Count == 0)
             {
-                <tr class="empty-row"><td colspan="3">No units yet.</td></tr>
+                <tr class="empty-row"><td colspan="5">No units yet.</td></tr>
             }
             @foreach (var u in Model.Units)
             {
-                <tr><td><span class="code-tag">@u.UnitCode</span></td><td>@u.UnitName</td><td>@u.Course?.CourseCode</td></tr>
+                <tr>
+                    <td><span class="code-tag">@u.UnitCode</span></td><td>@u.UnitName</td><td>@u.Course?.CourseCode</td>
+                    <td class="text-end">@(Model.EnrolmentCounts.GetValueOrDefault(u.Id))</td>
+                    <td class="text-end">
+                        <form method="post" asp-page-handler="Delete" asp-route-id="@u.Id"
+                              onsubmit="return confirm('Delete this unit?');">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
             }
             </tbody>
         </table>
