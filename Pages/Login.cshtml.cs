@@ -18,7 +18,7 @@ public class LoginModel(AppDbContext db) : PageModel
     [BindProperty] public string Password { get; set; } = string.Empty;
     public string? Error { get; set; }
 
-    // async/await: the thread is released while the database query runs.
+
     public async Task<IActionResult> OnPostAsync()
     {
         var account = await db.Accounts.FirstOrDefaultAsync(a => a.UserName == UserName);
@@ -38,7 +38,7 @@ public class LoginModel(AppDbContext db) : PageModel
             new(ClaimTypes.Name, account.UserName),
             new(ClaimTypes.Role, account.Role)
         };
-        if (account.StudentId is int studentId)               // pattern matching on int?
+        if (account.StudentId is int studentId)               
             claims.Add(new Claim("StudentId", studentId.ToString()));
 
         var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

@@ -5,7 +5,7 @@ using StudentRecordDraft.Models;
 
 namespace StudentRecordDraft.Pages;
 
-/// <summary>Shows the logged-in student's own record (and nobody else's).</summary>
+/// <summary>Shows the logged-in student's own record.</summary>
 public class MyRecordModel(AppDbContext db) : PageModel
 {
     public Student? Student { get; set; }
@@ -23,6 +23,6 @@ public class MyRecordModel(AppDbContext db) : PageModel
             .Include(s => s.Enrolments).ThenInclude(e => e.Unit)   // load related data
             .FirstOrDefaultAsync(s => s.Id == id);
 
-        Wam = Student?.GetWam() ?? 0;                               // ?. and ?? null handling
+        Wam = Student?.GetWam() ?? 0;                             
     }
 }
